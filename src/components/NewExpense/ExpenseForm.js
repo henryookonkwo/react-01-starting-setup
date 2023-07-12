@@ -60,7 +60,7 @@ const ExpenseForm = (props) => {
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
@@ -69,15 +69,32 @@ const ExpenseForm = (props) => {
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+    // setIsExpenseFormShowing(false);
+    // setShowButton(!showButton);
 
     // console.log(expenseData);
   };
+
+  // const [isExpenseFormShowing, setIsExpenseFormShowing] = useState(false);
+  // const [showButton, setShowButton] = useState(true);
+
+  // const showExpenseFormHandler = () => {
+  //   setIsExpenseFormShowing(true);
+  //   setShowButton(!showButton);
+  // };
+
+  // const unshowExpenseFormHandler = () => {
+  //   setIsExpenseFormShowing(false);
+  //   setShowButton(!showButton);
+  // };
+
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
           <input
+            required
             type="text"
             onChange={titleChangeHandler}
             // onChange={(e) => inputeChangeHandler("title", e.target.value)}
@@ -87,6 +104,7 @@ const ExpenseForm = (props) => {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+            required
             type="number"
             min="0.01"
             step="0.01"
@@ -98,6 +116,7 @@ const ExpenseForm = (props) => {
         <div className="new-expense__control">
           <label>Date</label>
           <input
+            required
             type="date"
             min="2019-01-01"
             max="2022-12-31"
@@ -108,6 +127,9 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={props.onCancel}>
+          Cancel
+        </button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
